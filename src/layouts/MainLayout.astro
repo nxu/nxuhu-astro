@@ -1,6 +1,9 @@
 ---
 import '../styles/global.css';
-import Header from '../components/Header.astro';
+import DarkModeToggle from '../components/DarkModeToggle.astro';
+import Menu from '../components/Menu.astro';
+
+const { activeMenu } = Astro.props;
 
 let title = 'Zsolt Fekete (nxu)';
 let description = 'Senior PHP/Laravel Software Developer from Sopron, Hungary';
@@ -39,8 +42,13 @@ let description = 'Senior PHP/Laravel Software Developer from Sopron, Hungary';
   </script>
 </head>
 <body class="font-serif dark:bg-gray-900 dark:text-gray-100">
-  <main class="mx-auto px-4 max-w-3xl py-8">
-    <Header></Header>
+  <div class="absolute md:fixed top-4 right-4 md:right-8">
+    <DarkModeToggle></DarkModeToggle>
+</div>
+
+  <main class="mx-auto px-4 max-w-3xl py-4">
+    <Menu active={activeMenu}></Menu>
+
     <slot></slot>
   </main>
 </body>

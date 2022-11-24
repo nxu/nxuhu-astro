@@ -1,7 +1,10 @@
 ---
+import Header from '../components/Header.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 ---
-<MainLayout>
+<MainLayout activeMenu="home">
+    <Header></Header>
+
     <div class="leading-loose">
         <p class="mb-4">
             Hey, I am nxu, short for Zsolt Fekete. 
@@ -13,7 +16,7 @@ import MainLayout from '../layouts/MainLayout.astro';
             tinker with electronics, or occasionally play video games.
         </p>
         <p>
-            Otherwise I'm a wannabe speedcuber, a Dungeons and Dragons DM, listen to lots of <a href="https://last.fm/user/nabunub" class="underline">music</a>, and sometimes go on hikes.
+            Otherwise I'm a wannabe <a href="/cubing" class="underline" title="My speedcubing stats">speedcuber</a>, a Dungeons and Dragons DM, listen to lots of <a href="https://last.fm/user/nabunub" class="underline">music</a>, and sometimes go on hikes.
         </p>
     </div>
 </MainLayout>
