@@ -4,8 +4,9 @@ export async function onRequest({ env }) {
         .prepare('select "session" from "records" order by ts desc limit 1')
         .first('session');
     } catch (e) {
+        console.trace();
         console.log(e);
-        return Response("Error logged");
+        return new Response("Error logged");
     }
 
     const { solved, dnf } = await env.DB
