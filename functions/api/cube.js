@@ -1,7 +1,12 @@
 export async function onRequest({ env }) {
-    const latestSession = await env.DB
+    try {
+        const latestSession = await env.DB
         .prepare('select "session" from "records" order by ts desc limit 1')
         .first('session');
+    } catch (e) {
+        console.log(e);
+        return Response("Error logged");
+    }
 
     const { solved, dnf } = await env.DB
         .prepare(`
@@ -63,6 +68,8 @@ export async function onRequest({ env }) {
     
     return Response.json({
         latest: {
+            solved,
+            dnf,
             average: rows[0].results[0].average,
             median: rows[1].results[0].median,
             sd: Math.sqrt(rows[2].results[0].var),
