@@ -68,8 +68,8 @@ export async function onRequest({ env }) {
             average: rows[0].results[0].average,
             median: rows[1].results[0].median,
             sd: Math.sqrt(rows[2].results[0].var),
-            times: rows[3].results.reverse(),
-            solves: rows[4].results.reverse(),
-        }
+        },
+        times: rows[3].results.reverse(),
+        solves: rows[4].results.reverse(),
     });
 }
