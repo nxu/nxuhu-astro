@@ -1,13 +1,7 @@
 export async function onRequest({ env }) {
-    try {
-        const latestSession = await env.DB
+    const latestSession = await env.DB
         .prepare('select "session" from "records" order by ts desc limit 1')
         .first('session');
-    } catch (e) {
-        console.log(e);
-        console.log(e.stack);
-        return new Response("Error logged");
-    }
 
     const { solved, dnf } = await env.DB
         .prepare(`
