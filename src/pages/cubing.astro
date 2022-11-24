@@ -1,0 +1,16 @@
+---
+import CubingStats from '../components/CubingStats.vue';
+import MainLayout from '../layouts/MainLayout.astro';
+---
+<MainLayout activeMenu="cubing">
+    <h1 class="text-4xl font-bold">
+        My speedcubing stats
+    </h1>
+
+    <p class="mt-4">
+        Recently I started speedcubing. Currently I have a MoYu RS3 M 2020, 
+        and use a somewhat modified version of Block Keeper for timing and scrambles.
+    </p>
+
+    <CubingStats client:visible></CubingStats>
+</MainLayout>

@@ -17,6 +17,10 @@
     "tailwindcss": "^3.0.24"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^4.1.0"
+    "@astrojs/cloudflare": "^4.1.0",
+    "@astrojs/vue": "^1.2.1",
+    "chart.js": "^3.9.1",
+    "vue": "^3.2.45",
+    "vue-chartjs": "^4.1.2"
   }
 }
