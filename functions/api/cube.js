@@ -4,8 +4,8 @@ export async function onRequest({ env }) {
         .prepare('select "session" from "records" order by ts desc limit 1')
         .first('session');
     } catch (e) {
-        console.trace();
         console.log(e);
+        console.log(e.stack);
         return new Response("Error logged");
     }
 
