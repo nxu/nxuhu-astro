@@ -5,7 +5,8 @@ use JsonMachine\JsonDecoder\ExtJsonDecoder;
 use JsonMachine\Items;
 
 // Composer autoloader
-require_once('./vendor/autoload.php');
+require_once(__DIR__ . '/vendor/autoload.php');
+chdir(__DIR__ .'/../');
 
 // Load Block Keeper json data file
 $puzzles = Items::fromFile('/Users/nxu/Library/Application Support/Block Keeper/storage/puzzles.json', [
@@ -74,4 +75,6 @@ fwrite($handle, "\n");
 fclose($handle);
 
 // Execute SQL
-
+// wrangler d1 execute --local cube --file $path
+shell_exec("wrangler d1 execute --local cube --file $sqlFile");
+shell_exec("wrangler d1 execute cube --file $sqlFile");

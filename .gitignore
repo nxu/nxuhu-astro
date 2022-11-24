@@ -5,6 +5,7 @@ dist/
 # dependencies
 node_modules/
 vendor/
+.wrangler
 
 # logs
 npm-debug.log*
