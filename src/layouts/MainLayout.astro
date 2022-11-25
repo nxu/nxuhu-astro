@@ -3,10 +3,10 @@ import '../styles/global.css';
 import DarkModeToggle from '../components/DarkModeToggle.astro';
 import Menu from '../components/Menu.astro';
 
-const { activeMenu } = Astro.props;
+const { activeMenu, meta } = Astro.props;
 
-let title = 'Zsolt Fekete (nxu)';
-let description = 'Senior PHP/Laravel Software Developer from Sopron, Hungary';
+let title = meta?.title ? meta.title : 'Zsolt Fekete (nxu)';
+let description = meta?.description ? meta.description : 'Senior PHP/Laravel Software Developer from Sopron, Hungary';
 ---
 <html lang="en">
 <head>

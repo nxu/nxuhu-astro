@@ -1,5 +1,13 @@
-<picture>
-    <source srcset="/avatar_2022.webp" type="image/webp">
-    <source srcset="/avatar_2022.png" type="image/png"> 
-    <img src="/avatar_2022.png" alt="nxU (Fekete Zsolt)">
-  </picture>
+---
+import { Picture } from 'astro-imagetools/components'
+
+---
+<Picture
+  src='/avatar_2022.png'
+  alt="nxu (Zsolt Fekete)"
+  preload="webp"
+  loading="lazy"
+  placeholder="blurred"
+  format={['avif', 'webp', 'png']}
+>
+</Picture>

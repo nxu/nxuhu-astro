@@ -78,7 +78,7 @@ const chartOptions = {
 <template>
     <div class="mt-6">
         <h2 class="text-2xl font-bold">
-            My recent session
+            My recent session {{ stats ? stats.latest.name : '' }}
         </h2>
 
         <div class="mt-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -129,8 +129,9 @@ const chartOptions = {
         </h2>
 
         <div class="mt-4">
-            <Box v-if="stats" class="h-[400px]">
+            <Box :loading="stats === null" class="h-[400px]">
                 <Line 
+                    v-if="stats"
                     :chart-data="solveTimeData"
                     :chart-options="chartOptions"
                 ></Line>
@@ -142,8 +143,9 @@ const chartOptions = {
         </h2>
 
         <div class="mt-4">
-            <Box v-if="stats" class="h-[400px]">
+            <Box :loading="stats === null" class="h-[400px]">
                 <Line 
+                    v-if="stats"
                     :chart-data="solvesData"
                     :chart-options="chartOptions"
                 ></Line>

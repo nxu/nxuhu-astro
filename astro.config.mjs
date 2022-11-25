@@ -1,5 +1,7 @@
+import { astroImageTools } from "astro-imagetools";
 import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
+import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 import vue from "@astrojs/vue";
@@ -10,5 +12,9 @@ export default defineConfig({
   adapter: cloudflare({
     mode: "directory"
   }),
-  integrations: [vue()]
+  integrations: [
+    astroImageTools,
+    mdx(),
+    vue(),
+  ]
 });

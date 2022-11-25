@@ -63,6 +63,7 @@ export async function onRequest({ env }) {
     
     return Response.json({
         latest: {
+            name: latestSession,
             solved,
             dnf,
             average: rows[0].results[0].average,

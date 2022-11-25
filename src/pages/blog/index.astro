@@ -1,0 +1,35 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const posts = await Astro.glob('./*.mdx');
+const meta = {
+    title: 'My blog - nxu',
+    description: 'The collection of my (mostly) technical blog posts.'
+}
+---
+
+<MainLayout activeMenu="blog" meta={meta}>
+    <h1 class="text-4xl font-bold">
+        My blog
+    </h1>
+
+    <div class="mt-6 divide-y">
+        {posts.map((post) => (
+            <article class="py-6">
+                <h1 class="text-xl font-bold">
+                    <a href={post.url} class="hover:underline">
+                        { post.frontmatter.title }
+                    </a>
+                </h1>
+                <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                    <time datetime={ post.frontmatter.date }>{ post.frontmatter.date }</time>
+                </p>
+    
+                <p class="mt-2">{ post.frontmatter.lead }</p>
+                <p class="mt-1">
+                    <a href={post.url} class="underline">Read more...</a>
+                </p>
+            </article>
+        ))}    
+    </div>
+</MainLayout>

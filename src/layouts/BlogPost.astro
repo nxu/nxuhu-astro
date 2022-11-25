@@ -1,0 +1,35 @@
+---
+import MainLayout from './MainLayout.astro';
+
+const {frontmatter} = Astro.props;
+
+const meta = {
+    title: frontmatter.title,
+    description: frontmatter.lead,
+}
+---
+
+<MainLayout activeMenu="blog" meta={meta}>
+    <p class="mb-4 text-gray-600 dark:text-gray-300 hover:undeline">
+        <a href="/blog">&laquo; Back</a>
+    </p>
+
+    <h1 class="text-4xl font-bold">
+        {frontmatter.title}
+    </h1>
+
+    <article class="prose dark:prose-invert max-w-none">
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+            <time datetime={ frontmatter.date }>{ frontmatter.date }</time>
+            -
+            <span>nxu (Zsolt Fekete)</span>
+        </p>
+    
+        <p>
+            { frontmatter.lead }
+        </p>    
+
+        <slot>
+        </slot>
+    </article>
+</MainLayout>

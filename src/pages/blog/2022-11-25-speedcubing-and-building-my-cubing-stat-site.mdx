@@ -1,0 +1,89 @@
+---
+layout: '../../layouts/BlogPost.astro'
+title: 'Speedcubing and building my cubing stat site'
+date: '2022-11-25'
+lead: 'After practicing speedcubing for a few months I decided to share my progress with the world and implemented a site that displays my latest results and stats dynamically.'
+---
+import { Picture } from 'astro-imagetools/components'
+
+## My speedcubing path
+I first learned to solve a Rubik's cube in high school. I learned the beginner's method and practiced enough to have a
+personal best time of around 55 seconds. However, as usual, the hype quickly faded and I forgot all about it.
+
+Then, more than 10 years later, a colleague of mine brought his cube into the office and taught me to solve it again.
+Old memories came back quickly and a few days later I found myself buying a Rubik's brand cube, and started playing with
+it in my free time. After a while, I practiced enough to realize I wanted to be faster and faster, so I started timing
+my solves. Originally I used [csTimer](https://cstimer.net/) but web apps are not my thing so I searched for offline
+apps and found [Block Keeper](https://dallasmcneil.com/projects/blockkeeper/). 
+
+Meanwhile, I quickly learned why speedcubers don't use Rubik's brand cubes - they are slow, clumsy, and all-in-all
+horrible to use seriously. So after some googling, I bought myself a proper (but cheap) speedcube, a MoYu RS3M 2020.
+This was a game-changer. Compared to my Rubik's cube, this was smooth, fast, and amazing to use. Of course, I had to get
+used to handling it as it was crazy fast for me, but my control became better and better with some practice, and my
+solving times improved quickly.
+
+As much as I love this cube though, I have a pretty big complaint: the speed and resistance are very inconsistent and I
+have yet to find the reason for it. Does it maybe need some lube? 
+
+## Customizing Block Keeper
+Anyway, I practiced a lot. Seriously, I think I may have a problem. One Sunday I managed to get 450+ solves, which
+amounts to almost 8 hours (send help). However, I can't just sit and keep solving, I have to occupy my mind while
+practicing so I usually watch YouTube or a TV show in the background. This was problematic with Block Keeper though. As
+much as I like it, it fills up much of my screen - meaning I can pretty much only listen to videos instead of viewing
+them. 
+
+Thankfully, it is an open-source application. Even better: an Electron app - which is pretty handy for me as a web
+developer with JS and CSS experience. So I quickly forked the project and added features for my convenience:
+
+- I added a small 350 x 175px view with only the scramble and the timer on it
+- I modified the touch bar to have the buttons I need: modifying results, switching scrambles, toggling minimal/full
+  view, and deleting the last result
+
+Here's how it looks in the minimal view. It fits nicely in the corner of my screen and I can keep watching videos behind
+it.
+
+<Picture
+  src="/images/block_keeper_minimal.png"
+  alt="Minimal view of my fork of Block Keeper"
+  loading="lazy"
+  decoding="async"
+  placeholder="blurred"
+></Picture>
+
+## Displaying stats on my website
+I slowly became obsessed with my statistics. I kept practicing daily to decrease my solving times, and while I
+noticed my slow but obvious progress, I wanted to see numbers. 
+
+Don't get me wrong, Block Keeper is amazing. It stores all the necessary numbers and shows me everything I want to see
+about my current session, but I wanted to see how I fared between my sessions. At first, I used its CSV export function
+to load all my data into Excel, cleaned and formatted it, and made some basic charts. This was tenuous and boring
+though, I wanted to automate everything I could - I'm a programmer after all. Wouldn't it be nice if all my data could
+be stored in a neat SQL database and could be displayed in nice-looking charts? So that's what I did.
+
+As I said, I wanted everything to be as automatized as possible. This meant no manual CSV import, no manual data
+updates, nothing. I wanted to see charts and numbers automagically displaying my progress. So I dug into the source of
+Block Keeper again, found where it keeps its session data, and wrote a locally-run PHP script that reads it and
+transforms it into SQL insert commands. All I needed now was a SQL database, a backend, and a front-end. The latter was
+easy, I have a website after all, and using Astro makes the whole process beautifully simple.
+
+## Introducing CloudFlare functions and D1
+The backend was somewhat problematic though. My site is fully static and "serverless", it runs on Cloudflare Pages. Now
+I have my own servers, I could fire up Laravel or something like that and make a simple API, but that just makes
+everything more complicated - and also, where's the fun in that?
+
+I've been a CloudFlare user for many years and watched them grow. They created workers that act as serverless functions
+(or middlewares) written in JS, then kept adding features like a key-value store (KV), object storage (R2), and more
+recently, an SQLite database that's exceptionally easy to use - let's welcome D1. Sure, it's in alpha, and its pricing
+is yet to be announced, but they've always been reasonable (dare I say exceptional) so far, so I jumped on the bandwagon
+and created a D1 database for my stats, and wrote a CloudFlare function (essentially a simplified worker integrated to a
+Pages site) acting as an API to return the required data.
+
+The developer experience was awesome. Their CLI utility, Wrangler makes local development extremely easy, and it also
+makes running arbitrary SQL on my remote SQL database a breeze. Deployment is as easy as creating a production database
+with a single command and pushing my code to git, it seriously doesn't get easier than that. There's no server to
+maintain, no SQL server to configure, and no deployment scripts (well, there are, but you can use templates that
+essentially reduce the required effort to zero).
+
+I pushed my code, and in one sitting, in one afternoon I had my site ready:
+[https://nxu.hu/cubing](https://nxu.hu/cubing). Oh, and (for now) it's all free. 
+
