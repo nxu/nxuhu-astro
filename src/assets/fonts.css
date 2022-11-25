@@ -38,6 +38,4 @@
 		 url('/fonts/noto-serif-v20-latin-ext_latin-700.svg#NotoSerif') format('svg'); /* Legacy iOS */
   }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
