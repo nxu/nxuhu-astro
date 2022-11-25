@@ -4,7 +4,8 @@ title: 'Speedcubing and building my cubing stat site'
 date: '2022-11-25'
 lead: 'After practicing speedcubing for a few months I decided to share my progress with the world and implemented a site that displays my latest results and stats dynamically.'
 ---
-import { Picture } from 'astro-imagetools/components'
+import { Picture } from '@astrojs/image/components';
+import blockKeeperImage from '../../assets/block_keeper_minimal.png'
 
 ## My speedcubing path
 I first learned to solve a Rubik's cube in high school. I learned the beginner's method and practiced enough to have a
@@ -43,11 +44,11 @@ Here's how it looks in the minimal view. It fits nicely in the corner of my scre
 it.
 
 <Picture
-  src="/images/block_keeper_minimal.png"
+  src={blockKeeperImage}
   alt="Minimal view of my fork of Block Keeper"
+  formats={['avif', 'webp', 'png']}
+  widths={[640, 736]}
   loading="lazy"
-  decoding="async"
-  placeholder="blurred"
 ></Picture>
 
 ## Displaying stats on my website
