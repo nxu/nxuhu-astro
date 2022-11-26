@@ -20,7 +20,7 @@ export async function onRequest({ env }) {
             select "time" as "median" from records
             where "session" = ?
                 and "result" <> 'DNF'
-                order by "time" asc
+                order by "time" ascy
             LIMIT 1
             OFFSET ${parseInt((solved + dnf) / 2)}
         `).bind(latestSession),
