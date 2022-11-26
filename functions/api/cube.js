@@ -22,7 +22,7 @@ export async function onRequest({ env }) {
                 and "result" <> 'DNF'
                 order by "time" asc
             LIMIT 1
-            OFFSET 75
+            OFFSET ${parseInt((solved + dnf) / 2)}
         `).bind(latestSession),
 
         env.DB.prepare(`
