@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DnD</title>
+    <style>
+        #container {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #image {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+      <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+      <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+    
+        var pusher = new Pusher('291781e4072b88e051ca', {
+          cluster: 'eu'
+        });
+    
+        var channel = pusher.subscribe('dnd');
+
+        channel.bind('image', function(data) {
+            if (typeof data === "string") {
+                data = JSON.parse(data);
+            }
+            
+            document.getElementById('image').setAttribute('src', data.src);
+        });
+      </script>
+</head>
+<body>
+    <div id="container">
+        <img src="https://www.dndbeyond.com/attachments/8/220/cos-cover-4k.jpg" alt="" id="image">
+    </div>
+</body>
+</html>
