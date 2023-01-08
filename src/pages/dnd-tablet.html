@@ -46,5 +46,20 @@
     <div id="container">
         <img src="https://www.dndbeyond.com/attachments/8/220/cos-cover-4k.jpg" alt="" id="image">
     </div>
+
+    <script>
+        window.addEventListener("load", async (event) => {
+            try {
+                let wakeLock = await navigator.wakeLock.request('screen');
+
+                document.addEventListener('visibilitychange', async () => {
+                    if (wakeLock !== null && document.visibilityState === 'visible') {
+                        wakeLock = await navigator.wakeLock.request('screen');
+                    }
+                });
+            } catch (err) {
+            }
+        });
+    </script>
 </body>
 </html>
