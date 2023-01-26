@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       fontFamily: {
         'serif': ['Noto Serif', 'ui-serif'],
+      },
+      screens: {
+        'print': {'raw': 'print'},
       }
     },
   },
