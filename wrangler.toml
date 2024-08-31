@@ -2,6 +2,5 @@ account_id = "7fc55ceb847a4e089064a9e2022a2808"
 
 [[ d1_databases ]]
 binding = "DB" # i.e. available in your Worker on env.DB
-database_name = "cube"
-database_id = "63b4557e-31e1-405f-b225-f8560e90f7a1"
-account_id = "7fc55ceb847a4e089064a9e2022a2808"
+database_name = "cube-live"
+database_id = "6fdb4fca-fbfd-4ee5-b1ff-3c5863386b7f"
