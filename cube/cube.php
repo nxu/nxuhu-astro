@@ -87,4 +87,4 @@ shell_exec("wrangler d1 execute --local cube-live --file $sqlFile");
 
 // Use CLOUDFLARE_API_TOKEN from .env
 $cfApiToken = getenv('CLOUDFLARE_API_TOKEN');
-shell_exec("export CLOUDFLARE_API_TOKEN=$cfApiToken && wrangler d1 execute cube-live --file $sqlFile");
+shell_exec("export CLOUDFLARE_API_TOKEN=$cfApiToken && wrangler d1 execute cube-live --remote --file $sqlFile");
