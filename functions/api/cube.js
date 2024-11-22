@@ -1,4 +1,4 @@
-export async function onRequest({ env }) {
+const queryFromSql = async function(env) {
     const latestSession = await env.DB
         .prepare('select "session" from "records" order by ts desc limit 1')
         .first('session');
@@ -60,8 +60,8 @@ export async function onRequest({ env }) {
             LIMIT 30
         `),
     ]);
-    
-    return Response.json({
+
+    return {
         latest: {
             name: latestSession,
             solved,
@@ -72,5 +72,21 @@ export async function onRequest({ env }) {
         },
         times: rows[3].results.reverse(),
         solves: rows[4].results.reverse(),
-    });
+    };
+}
+
+export async function onRequest({ env }) {
+    let data = await env.assets.get('cubing_sessions');
+
+    if (! data) {
+        data = await queryFromSql(env);
+
+        await env.assets.put('cubing_sessions', JSON.stringify(data), {
+            expirationTtl: 60 * 60 * 4,
+        })
+    } else {
+        data = JSON.parse(data);
+    }
+
+    return Response.json(data);
 }

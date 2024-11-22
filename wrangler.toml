@@ -1,6 +1,14 @@
-account_id = "7fc55ceb847a4e089064a9e2022a2808"
+name = 'nxuhu-astro'
+pages_build_output_dir = "./dist"
+
+#account_id = "7fc55ceb847a4e089064a9e2022a2808"
 
 [[ d1_databases ]]
 binding = "DB" # i.e. available in your Worker on env.DB
 database_name = "cube-live"
 database_id = "6fdb4fca-fbfd-4ee5-b1ff-3c5863386b7f"
+
+[[kv_namespaces]]
+binding = "assets"
+id = "72775f8c9a8345aaac568cd60425dd1f"
+preview_id = "dcc30ce0603e47748bb96714870841d6"
