@@ -13,6 +13,26 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->safeLoad();
 
+// Parse input arguments
+$opts = getopt('', ['since::']);
+
+if (array_key_exists('since', $opts)) {
+    $since = (DateTimeImmutable::createFromFormat('Y-m-d', $opts['since']))->setTime(0, 0, 0);
+
+    if ($since === false) {
+        fwrite(STDERR, "[Error] Invalid date provided for --since argument: " . $opts['since'] . PHP_EOL);
+        exit(1);
+    }
+} else {
+    $since = (new DateTimeImmutable())
+        ->setTime(0, 0, 0)
+        ->sub(DateInterval::createFromDateString('2 weeks'));
+}
+
+echo "Processing entries after " . $since->format('Y-m-d') . PHP_EOL;
+
+$since = $since->getTimestamp();
+
 chdir(__DIR__ .'/../');
 
 // Load Block Keeper json data file
@@ -23,7 +43,7 @@ $puzzles = Items::fromFile('/Users/nxu/Library/Application Support/Block Keeper/
 // Writes records as insert statement into the file and flushes the buffer
 function flushWriteStatements($handle, &$buffer) {
     fwrite($handle, 'INSERT OR IGNORE INTO "records" ("session", "time", "ts", "result") VALUES ');
-    
+
     foreach ($buffer as $index => $record) {
         fwrite($handle, sprintf(
             "('%s', %s, %s, '%s')",
@@ -55,12 +75,16 @@ foreach ($puzzles as $types) {
     }
 
     foreach ($types as $type) {
-        if ($type['name'] !== '3x3x3') { 
+        if ($type['name'] !== '3x3x3') {
             continue;
         }
 
         foreach ($type['sessions'] as $session) {
             foreach ($session['records'] as $record) {
+                if ($record['date'] < $since) {
+                    continue;
+                }
+
                 $buffer[] = [
                     'session' => $session['name'],
                     'time' => $record['time'],
