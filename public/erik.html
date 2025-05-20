@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Szia Erik</title>
+</head>
+<body>
+    <div>
+    <label for="napi_befizetes">Napi befizetés</label>
+    <input type="number" id="napi_befizetes" value="2000">
+    </div>
+
+    <div>
+        <label for="eves_kamat">Éves kamat (százalékban)</label>
+        <input type="text" id="eves_kamat" value="1.46">   
+    </div>
+
+    <div>
+        <button onclick="csinaljad()">Számol</button>
+    </div>
+
+    <div>
+        <textarea name="" id="result" rows="4" style="min-width:300px"></textarea>
+    </div>
+
+<script>
+    function csinaljad() {
+    // Napi befizetés és kamat alapú megtakarítás kalkuláció
+let napi_befizetes = parseFloat(document.getElementById('napi_befizetes').value);  // forint
+let apy = parseFloat(document.getElementById('eves_kamat').value);  // 1.46% éves kamat
+const napok_szama_1_ho = 30;
+const napok_szama_6_ho = 30 * 6;
+const napok_szama_1_ev = 365;
+
+// Napi kamatláb (kamatos kamattal)
+const napi_kamat = Math.pow(1 + apy, 1/365) - 1;
+
+function szamolj_egyenleget(napok_szama, napi_befizetes, napi_kamat) {
+    let egyenleg = 0.0;
+    for (let nap = 0; nap < napok_szama; nap++) {
+        egyenleg *= (1 + napi_kamat);
+        egyenleg += napi_befizetes;
+    }
+    return egyenleg;
+}
+
+// Eredmények számítása
+const egyenleg_1_ho = szamolj_egyenleget(napok_szama_1_ho, napi_befizetes, napi_kamat);
+const egyenleg_6_ho = szamolj_egyenleget(napok_szama_6_ho, napi_befizetes, napi_kamat);
+const egyenleg_1_ev = szamolj_egyenleget(napok_szama_1_ev, napi_befizetes, napi_kamat);
+
+// Kamat nélküli összegek
+const nincs_kamat_1_ho = napi_befizetes * napok_szama_1_ho;
+const nincs_kamat_6_ho = napi_befizetes * napok_szama_6_ho;
+const nincs_kamat_1_ev = napi_befizetes * napok_szama_1_ev;
+
+// Eredmények kiírása
+let results = "";
+results += `1 hónap után kamattal: ${egyenleg_1_ho.toFixed(2)} Ft (kamat nélkül: ${nincs_kamat_1_ho} Ft)\n`;
+results += `6 hónap után kamattal: ${egyenleg_6_ho.toFixed(2)} Ft (kamat nélkül: ${nincs_kamat_6_ho} Ft)\n`;
+results += `1 év után kamattal: ${egyenleg_1_ev.toFixed(2)} Ft (kamat nélkül: ${nincs_kamat_1_ev} Ft)`;
+
+document.getElementById('result').innerHTML = results;
+    }
+</script>
+</body>
+</html>
