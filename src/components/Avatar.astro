@@ -1,11 +1,12 @@
 ---
 import { Picture } from '@astrojs/image/components';
-import avatar from '../assets/avatar_2022.png';
+import avatar from '../assets/avatar_2025.jpg';
 ---
 <Picture
   src={avatar}
   alt="nxu (Zsolt Fekete)"
-  formats={['avif', 'webp', 'png']}
+  formats={['avif', 'webp', 'jpg']}
   widths={[512]}
+  class="rounded-full"
 >
 </Picture>
