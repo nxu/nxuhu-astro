@@ -1,0 +1,46 @@
+---
+import Bpm from '../../components/Bpm.astro';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const mixes = await Astro.glob('./*.mdx');
+const meta = {
+    title: 'My mixes and live sets - nxu',
+    description: 'The collection of my DJ sets and live mixes.'
+}
+---
+
+<MainLayout activeMenu="blog" meta={meta}>
+    <h1 class="text-4xl font-bold">
+        DJ
+    </h1>
+
+    <p class="mt-6">
+        I love to fiddle with potmeters and faders as a hobby. I play electronic music: I started with 
+        psytrance, and currently I'm obsessed with fast, hard, bouncy stuff. I also love modern hard techno. 
+    </div>
+
+    <div class="mt-6 divide-y">
+        {mixes.map((mix) => (
+            <article class="py-6">
+                <div class="md:inline-flex md:gap-4 md:items-center">
+                    <h1 class="text-xl font-bold">
+                        <a href={mix.url} class="hover:underline">
+                            { mix.frontmatter.title }
+                        </a>
+                    </h1>
+
+                    <Bpm>{ mix.frontmatter.bpm }</Bpm>
+                </div>
+                <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                    <time datetime={ mix.frontmatter.date }>{ mix.frontmatter.date }</time>
+                </p>
+    
+                <div class="mt-4" set:html={mix.frontmatter.embed}></div>
+
+                <p class="mt-2">
+                    <a href={mix.url} class="underline">Open page</a>
+                </p>
+            </article>
+        ))}    
+    </div>
+</MainLayout>
