@@ -11,10 +11,18 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Initialize dotenv config
 $dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->safeLoad();
+$dotenv->load();
+$dotenv->required('CLOUDFLARE_API_TOKEN')->notEmpty();
 
 // Parse input arguments
-$opts = getopt('', ['since::']);
+$opts = getopt('', ['since::', 'help']);
+
+if (array_key_exists('help', $opts)) {
+    echo "Usage:\n\n";
+
+    echo "php cube.php [--since={Y-m-d}]\n";
+    exit;
+}
 
 if (array_key_exists('since', $opts)) {
     $since = (DateTimeImmutable::createFromFormat('Y-m-d', $opts['since']))->setTime(0, 0, 0);
@@ -110,5 +118,5 @@ fclose($handle);
 shell_exec("wrangler d1 execute --local cube-live --file $sqlFile");
 
 // Use CLOUDFLARE_API_TOKEN from .env
-$cfApiToken = getenv('CLOUDFLARE_API_TOKEN');
+$cfApiToken = $_ENV['CLOUDFLARE_API_TOKEN'];
 shell_exec("export CLOUDFLARE_API_TOKEN=$cfApiToken && wrangler d1 execute cube-live --remote --file $sqlFile");
