@@ -3,7 +3,7 @@ import Avatar from '../components/Avatar.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 
 const meta = {
-    title: 'Resume - nxu',
+    title: 'Résumé - nxu',
 }
 ---
 <MainLayout activeMenu="resume" meta={meta}>
@@ -17,7 +17,7 @@ const meta = {
                 Zsolt Fekete
             </h1>
             <h2 class="mt-1 text-base md:text-xl print:text-lg print:mt-0 font-medium">
-                Senior backend developer
+                Senior PHP developer
             </h2>
             <div class="flex flex-col gap-1 mt-4 print:mt-2 text-sm text-gray-600 dark:text-gray-300">
                 <p class="flex gap-2 items-center justify-center md:justify-start print:justify-start">
@@ -42,7 +42,7 @@ const meta = {
 
     <div class="flex flex-col gap-8 mt-8 print:text-xs print:block">
         <div>
-            <h2 class="text-2xl font-bold print:text-lg">Skills, experience</h2>
+            <h2 class="text-2xl font-bold print:text-lg">Skills</h2>
             <ul class="mt-4 flex flex-col gap-4 print:block">
                 <li class="print:break-inside-avoid">
                     <p><span class="font-bold">PHP</span> <a href="https://www.phptherightway.com" class="text-gray-600 dark:text-gray-300 hover:underline print:hidden">(The Right Way)</a></p>
@@ -57,7 +57,7 @@ const meta = {
                 <li class="print:mt-4 print:break-inside-avoid">
                     <p class="font-bold">Laravel</p>
                     <ul class="list-disc list-inside">
-                        <li>9+ years of experience (Laravel 4-11+)</li>
+                        <li>10+ years of experience (Laravel 4-12+)</li>
                         <li>Ecosystem: Nova, Horizon, Octane, Socialite, Passport, Forge</li>
                         <li>Composer package development (Laravel / Framework-agnostic)</li>
                     </ul>
@@ -91,14 +91,15 @@ const meta = {
                         <li>Managing Linux (Ubuntu) servers and applications</li>
                         <li>Designing, provisioning and maintaining application infrastucture</li>
                         <ul class="pl-4 list-disc list-inside">
-                            <li>Load balancing (nginx, HAProxy)</li>
+                            <li>HTTP servers, load balancing (Caddy, nginx, HAProxy)</li>
                             <li>Caching (Redis, CloudFlare)</li>
                             <li>Handling shared resources (databases, Redis, S3)</li>
                             <li>Database replication</li>
                             <li>Monitoring (Munin, Datadog)</li>
                         </ul>
+                        <li>Docker, containerization</li>
                         <li>Automatized deployment (Deployer, Laravel Forge)</li>
-                        <li>CI / CD systems (GitLab CI)</li>
+                        <li>CI / CD systems (GitLab CI, GitHub Actions)</li>
                         <li>CloudFlare infrastructure (Edge caching / CDN, Pages, Workers, D1, KV)</li>
                         <li>DigitalOcean</li>
                         <li>Strong security-mindset</li>
@@ -132,6 +133,7 @@ const meta = {
                         <li>Migrating legacy CMS to Laravel, introducing Laravel at company level with great success</li>
                         <li>Keeping CMS up-to-date while managing bugs and feature requests</li>
                         <li>Designing and implementing a custom Laravel-based e-commerce engine</li>
+                        <li>Cybersecurity responsibilities at company level</li>
                         <li>Lead developer role</li>
                         <ul class="pl-4 list-disc list-inside">
                             <li>Educating and mentoring junior developers</li>
