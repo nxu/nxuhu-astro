@@ -2,7 +2,7 @@
 import Bpm from '../../components/Bpm.astro';
 import MainLayout from '../../layouts/MainLayout.astro';
 
-const mixes = await Astro.glob('./*.mdx');
+const mixes = (await Astro.glob('./*.mdx')).reverse();
 const meta = {
     title: 'My mixes and live sets - nxu',
     description: 'The collection of my DJ sets and live mixes.'
