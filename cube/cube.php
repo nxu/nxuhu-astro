@@ -115,8 +115,9 @@ fclose($handle);
 
 // Execute SQL
 // wrangler d1 execute --local cube --file $path
-shell_exec("wrangler d1 execute --local cube-live --file $sqlFile");
+shell_exec("bunx --bun wrangler d1 execute --local cube-live --file $sqlFile");
 
 // Use CLOUDFLARE_API_TOKEN from .env
 $cfApiToken = $_ENV['CLOUDFLARE_API_TOKEN'];
-shell_exec("export CLOUDFLARE_API_TOKEN=$cfApiToken && wrangler d1 execute cube-live --remote --file $sqlFile");
+var_dump($cfApiToken);
+shell_exec("export CLOUDFLARE_API_TOKEN=$cfApiToken && bunx --bun wrangler d1 execute cube-live --remote --file $sqlFile");

@@ -1,7 +1,7 @@
 name = 'nxuhu-astro'
 pages_build_output_dir = "./dist"
 
-#account_id = "7fc55ceb847a4e089064a9e2022a2808"
+account_id = "7fc55ceb847a4e089064a9e2022a2808"
 
 [[ d1_databases ]]
 binding = "DB" # i.e. available in your Worker on env.DB
