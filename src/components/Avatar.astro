@@ -1,12 +1,12 @@
 ---
-import { Picture } from '@astrojs/image/components';
+import { Picture } from 'astro:assets';
 import avatar from '../assets/avatar_2026.jpg';
 ---
 <Picture
   src={avatar}
   alt="nxu (Zsolt Fekete)"
   formats={['avif', 'webp', 'jpg']}
-  widths={[512]}
+  width={512}
   class="rounded-full"
 >
 </Picture>

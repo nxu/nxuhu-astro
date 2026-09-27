@@ -1,6 +1,5 @@
 {
-  "compilerOptions": {
-    "moduleResolution": "node",
-    "jsx": "preserve"
-  }
+  "extends": "astro/tsconfigs/base",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
 }

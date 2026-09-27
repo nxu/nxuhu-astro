@@ -1,7 +1,7 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 
-const posts = await Astro.glob('./*.mdx');
+const posts = Object.values(import.meta.glob('./*.mdx', { eager: true }));
 const meta = {
     title: 'My blog - nxu',
     description: 'The collection of my (mostly) technical blog posts.'

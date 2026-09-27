@@ -3,7 +3,7 @@ import MenuItem from './MenuItem.astro';
 
 const { active } = Astro.props;
 ---
-<div class="mb-4 flex gap-4 px-3 py-2 bg-gray-50 dark:bg-gray-800 rounded print:hidden">
+<div class="mb-4 flex gap-4 px-3 py-2 bg-gray-50 dark:bg-gray-800 rounded-sm print:hidden">
     <MenuItem active={active == 'home'} href="/">Home</MenuItem>
     <MenuItem active={active == 'resume'} href="/resume">CV</MenuItem>
     <MenuItem active={active == 'cubing'} href="/cubing">Cubing</MenuItem>

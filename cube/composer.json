@@ -1,6 +1,0 @@
-{
-    "require": {
-        "halaxa/json-machine": "^1.1",
-        "vlucas/phpdotenv": "^5.6"
-    }
-}
