@@ -14,6 +14,10 @@
       {
         devShells.default = pkgs.mkShell {
           packages = [ pkgs.bun pkgs.rsync ];
+
+          # sharp's prebuilt Linux binary links against libstdc++, which Nix's loader can't find in /usr/lib.
+          LD_LIBRARY_PATH = pkgs.lib.optionalString pkgs.stdenv.isLinux
+            (pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc.lib ]);
         };
       });
 }
