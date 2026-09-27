@@ -4,7 +4,7 @@ title: 'Speedcubing and building my cubing stat site'
 date: '2022-11-25'
 lead: 'After practicing speedcubing for a few months I decided to share my progress with the world and implemented a site that displays my latest results and stats dynamically.'
 ---
-import { Picture } from '@astrojs/image/components';
+import { Picture } from 'astro:assets';
 import blockKeeperImage from '../../assets/block_keeper_minimal.png'
 
 ## My speedcubing path
@@ -48,6 +48,7 @@ it.
   alt="Minimal view of my fork of Block Keeper"
   formats={['avif', 'webp', 'png']}
   widths={[640, 736]}
+  sizes="(max-width: 768px) 100vw, 736px"
   loading="lazy"
 ></Picture>
 

@@ -1,0 +1,41 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Install dependencies
+        run: nix develop -c bun install --frozen-lockfile
+
+      - name: Build
+        run: nix develop -c bun run build
+        env:
+          ASTRO_TELEMETRY_DISABLED: 1
+          PUBLIC_CUBE_API_URL: ${{ vars.PUBLIC_CUBE_API_URL }}
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+
+      - name: Upload
+        run: |
+          nix develop -c rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key" \
+            dist/ "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ vars.DEPLOY_PATH }}/"
